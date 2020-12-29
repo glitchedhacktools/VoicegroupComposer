@@ -29,11 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainWindow));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("voicegroup174");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("voice_keysplit_all voicegroup002", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("000 - Acoustic Grand", new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("voice_keysplit_all voicegroup002");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("000 - Acoustic Grand", new System.Windows.Forms.TreeNode[] {
+            treeNode7});
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,13 +76,24 @@
             this.ayudaToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.instrumentsInVG = new System.Windows.Forms.ListBox();
             this.codeInVG = new System.Windows.Forms.ListBox();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.instrumentsTreeView = new System.Windows.Forms.TreeView();
+            this.songsTreeView = new System.Windows.Forms.TreeView();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonRemove = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -446,26 +455,22 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Controls.Add(this.instrumentsInVG, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.codeInVG, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.treeView1, 0, 0);
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 240F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 240F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.instrumentsInVG, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.codeInVG, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tabControl1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 49);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 379);
             this.tableLayoutPanel1.TabIndex = 3;
-            // 
-            // folderBrowserDialog
-            // 
-            this.folderBrowserDialog.SelectedPath = "D:\\RH\\PROYECTOS";
-            this.folderBrowserDialog.ShowNewFolderButton = false;
             // 
             // instrumentsInVG
             // 
@@ -473,9 +478,9 @@
             this.instrumentsInVG.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.instrumentsInVG.FormattingEnabled = true;
             this.instrumentsInVG.ItemHeight = 15;
-            this.instrumentsInVG.Location = new System.Drawing.Point(269, 192);
+            this.instrumentsInVG.Location = new System.Drawing.Point(329, 3);
             this.instrumentsInVG.Name = "instrumentsInVG";
-            this.instrumentsInVG.Size = new System.Drawing.Size(260, 184);
+            this.instrumentsInVG.Size = new System.Drawing.Size(234, 373);
             this.instrumentsInVG.TabIndex = 0;
             // 
             // codeInVG
@@ -484,27 +489,109 @@
             this.codeInVG.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.codeInVG.FormattingEnabled = true;
             this.codeInVG.ItemHeight = 15;
-            this.codeInVG.Location = new System.Drawing.Point(535, 192);
+            this.codeInVG.Location = new System.Drawing.Point(569, 3);
             this.codeInVG.Name = "codeInVG";
-            this.codeInVG.Size = new System.Drawing.Size(262, 184);
+            this.codeInVG.Size = new System.Drawing.Size(228, 373);
             this.codeInVG.TabIndex = 1;
             // 
-            // treeView1
+            // folderBrowserDialog
             // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Location = new System.Drawing.Point(3, 3);
-            this.treeView1.Name = "treeView1";
-            treeNode1.Name = "Nodo2";
-            treeNode1.Text = "voicegroup174";
-            treeNode2.Name = "Nodo1";
-            treeNode2.Text = "voice_keysplit_all voicegroup002";
-            treeNode3.Name = "Nodo0";
-            treeNode3.Text = "000 - Acoustic Grand";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
-            this.tableLayoutPanel1.SetRowSpan(this.treeView1, 2);
-            this.treeView1.Size = new System.Drawing.Size(260, 373);
-            this.treeView1.TabIndex = 2;
+            this.folderBrowserDialog.SelectedPath = "D:\\RH\\PROYECTOS";
+            this.folderBrowserDialog.ShowNewFolderButton = false;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(3, 3);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(234, 373);
+            this.tabControl1.TabIndex = 2;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.ActionEnableDisableButtons);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.instrumentsTreeView);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(226, 347);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Instruments";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.songsTreeView);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(226, 347);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Voicegroups";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // instrumentsTreeView
+            // 
+            this.instrumentsTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.instrumentsTreeView.Location = new System.Drawing.Point(3, 3);
+            this.instrumentsTreeView.Name = "instrumentsTreeView";
+            treeNode7.Name = "Nodo1";
+            treeNode7.Text = "voice_keysplit_all voicegroup002";
+            treeNode8.Name = "Nodo0";
+            treeNode8.Text = "000 - Acoustic Grand";
+            this.instrumentsTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode8});
+            this.instrumentsTreeView.Size = new System.Drawing.Size(220, 341);
+            this.instrumentsTreeView.TabIndex = 3;
+            // 
+            // songsTreeView
+            // 
+            this.songsTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.songsTreeView.Location = new System.Drawing.Point(3, 3);
+            this.songsTreeView.Name = "songsTreeView";
+            this.songsTreeView.Size = new System.Drawing.Size(220, 341);
+            this.songsTreeView.TabIndex = 0;
+            this.songsTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.ActionChangeVoicegroupComboBoxIndex);
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Controls.Add(this.buttonAdd, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.buttonRemove, 0, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(243, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(80, 373);
+            this.tableLayoutPanel2.TabIndex = 3;
+            // 
+            // buttonAdd
+            // 
+            this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAdd.Location = new System.Drawing.Point(3, 160);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(74, 23);
+            this.buttonAdd.TabIndex = 0;
+            this.buttonAdd.Text = "Add >>";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            // 
+            // buttonRemove
+            // 
+            this.buttonRemove.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonRemove.Location = new System.Drawing.Point(3, 189);
+            this.buttonRemove.Name = "buttonRemove";
+            this.buttonRemove.Size = new System.Drawing.Size(74, 23);
+            this.buttonRemove.TabIndex = 1;
+            this.buttonRemove.Text = "<< Remove";
+            this.buttonRemove.UseVisualStyleBackColor = true;
             // 
             // mainWindow
             // 
@@ -522,6 +609,10 @@
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -576,7 +667,14 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.ListBox instrumentsInVG;
         private System.Windows.Forms.ListBox codeInVG;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TreeView instrumentsTreeView;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TreeView songsTreeView;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Button buttonRemove;
     }
 }
 

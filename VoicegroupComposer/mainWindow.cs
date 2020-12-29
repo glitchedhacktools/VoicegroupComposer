@@ -16,6 +16,7 @@ namespace VoicegroupComposer
         // GLOBAL VARIABLES DEFINITION
 
         public string GlobalDefaultInstrument = "voice_square_1 60, 0, 0, 2, 0, 0, 15, 0";
+        public string GlobalCryTablesEntry = ".include \"sound/cry_tables.inc\"";
 
         public List<string> GlobalInstrumentsList = new List<string>
         {
@@ -164,17 +165,37 @@ namespace VoicegroupComposer
 
         public mainWindow()
         {
+            bool opened;
             InitializeComponent();
-            if (!SetDirectory())
+            do
             {
-                MessageBox.Show("Couldn't find the decomp project folder.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Close();
-            }
+                opened = true;
+                switch (SetDirectory())
+                {
+                    case 1:
+                        if(MessageBox.Show("Couldn't find the decomp project folder.", "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Cancel)
+                        {
+                            Environment.Exit(1);
+                        }
+                        else
+                        {
+                            opened = false;
+                        }
+                        break;
+                    case 2:
+                        Environment.Exit(1);
+                        break;
+                    default:
+                        break;
+                }
+            } while (!opened);
+
             GetVoicegroupList();
             OpenVoicegroupFile();
+            GetVoicegroupSongs();
         }
 
-        public bool SetDirectory()
+        public int SetDirectory()
         {
             string folderDir = null;
             string currentDir = null;
@@ -184,26 +205,72 @@ namespace VoicegroupComposer
                 foreach(string element in GlobalFilesNeeded)
                 {
                     currentDir = folderDir + element;
-                    if (!File.Exists(currentDir)) return false;
+                    if (!File.Exists(currentDir)) return 1;
                     GlobalFilesPaths.Add(currentDir);
                     GlobalProjectPath = folderDir;
                 }
-                return true;
+                return 0;
             }
-            return false;
+            return 2;
         }
 
         public bool GetVoicegroupList()
         {
             voicegroupFilesComboBox.Items.Clear();
+            songsTreeView.Nodes.Clear();
             string[] voicegroups = File.ReadAllLines(GlobalFilesPaths[1]);
             foreach (string element in voicegroups)
             {
                 voicegroupFilesComboBox.Items.Add("/" + element.Remove(0, 9).Trim('\"'));
+                TreeNode voicegroup = new TreeNode(element.Remove(0, 28).Trim('\"'));
+                if(element != GlobalCryTablesEntry) songsTreeView.Nodes.Add(voicegroup);
             }
             voicegroupFilesComboBox.Items.RemoveAt(0);
             voicegroupFilesComboBox.SelectedIndex = 0;
             return true;
+        }
+
+        public int GetVoicegroupSongs()
+        {
+            int i;
+            bool done = true;
+            do
+            {
+                if (!done) GetVoicegroupList();
+                string[] songs = File.ReadAllLines(GlobalFilesPaths[0]);
+                int vg = 0;
+                string song = "";
+                for (i = 5; i < songs.Length; i = i + 3)
+                {
+                    try
+                    {
+                        song = songs[i].Remove(songs[i].Length - 14).Remove(0, 14).ToUpper();
+                        done = true;
+                    }
+                    catch
+                    {
+                        if (MessageBox.Show("Check all entries in /songs.mk are in the correct format.", "Error parsing /songs.mk", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Cancel)
+                        {
+                            Environment.Exit(1);
+                        }
+                        else
+                        {
+                            done = false;
+                            break;
+                        }
+                    }
+                    try
+                    {
+                        vg = short.Parse(songs[i + 1].Remove(38).Remove(0, 35));
+                        songsTreeView.Nodes[vg].Nodes.Add(song);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            } while (!done);
+            return 0;
         }
 
         public bool OpenVoicegroupFile()
@@ -233,5 +300,42 @@ namespace VoicegroupComposer
         {
             OpenVoicegroupFile();
         }
+
+        private void ActionEnableDisableButtons(object sender, EventArgs e)
+        {
+            switch(tabControl1.SelectedIndex)
+            {
+                default:
+                    buttonAdd.Enabled = true;
+                    buttonRemove.Enabled = true;
+                    break;
+                case 1:
+                    buttonAdd.Enabled = false;
+                    buttonRemove.Enabled = false;
+                    break;
+            }
+        }
+
+        private void ActionChangeVoicegroupComboBoxIndex(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            TreeNode selectedNode = ((TreeView)sender).SelectedNode;
+            int index = -1;
+            if(selectedNode.Level > 0)
+            {
+                index = selectedNode.Parent.Index;
+            }
+            else
+            {
+                if(selectedNode.Nodes.Count == 0) index = selectedNode.Index;
+            }
+            if (index != -1) voicegroupFilesComboBox.SelectedIndex = index;
+        }
+    }
+
+    public class InstrumentData
+    {
+        public static int id { get; set; }
+        public static string instrument { get; set; }
+        public static string[] lines { get; set; }
     }
 }
