@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainWindow));
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("voice_keysplit_all voicegroup002");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("000 - Acoustic Grand", new System.Windows.Forms.TreeNode[] {
-            treeNode7});
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("voice_keysplit_all voicegroup002");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("000 - Acoustic Grand", new System.Windows.Forms.TreeNode[] {
+            treeNode9});
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -496,7 +496,6 @@
             // 
             // folderBrowserDialog
             // 
-            this.folderBrowserDialog.SelectedPath = "D:\\RH\\PROYECTOS";
             this.folderBrowserDialog.ShowNewFolderButton = false;
             // 
             // tabControl1
@@ -538,12 +537,12 @@
             this.instrumentsTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.instrumentsTreeView.Location = new System.Drawing.Point(3, 3);
             this.instrumentsTreeView.Name = "instrumentsTreeView";
-            treeNode7.Name = "Nodo1";
-            treeNode7.Text = "voice_keysplit_all voicegroup002";
-            treeNode8.Name = "Nodo0";
-            treeNode8.Text = "000 - Acoustic Grand";
+            treeNode9.Name = "Nodo1";
+            treeNode9.Text = "voice_keysplit_all voicegroup002";
+            treeNode10.Name = "Nodo0";
+            treeNode10.Text = "000 - Acoustic Grand";
             this.instrumentsTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode8});
+            treeNode10});
             this.instrumentsTreeView.Size = new System.Drawing.Size(220, 341);
             this.instrumentsTreeView.TabIndex = 3;
             // 
