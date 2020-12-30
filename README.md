@@ -6,7 +6,7 @@ Glitched Voicegroup Composer helps you to find or create voicegroups in **[pokee
 
 ## Requirements
 
-Glitched Voicegroup Composer is compatible with any **Windows** installation compatible with [.NET Framework 4.8](https://docs.microsoft.com/es-es/dotnet/framework/get-started/system-requirements).
+Glitched Voicegroup Composer is compatible with any **Windows** installation running [.NET Framework 4.8](https://docs.microsoft.com/es-es/dotnet/framework/get-started/system-requirements).
 
 ## Licensing
 
