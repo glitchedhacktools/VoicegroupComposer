@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainWindow));
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("voice_keysplit_all voicegroup002");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("000 - Acoustic Grand", new System.Windows.Forms.TreeNode[] {
-            treeNode9});
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("voice_keysplit_all voicegroup002");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("000 - Acoustic Grand", new System.Windows.Forms.TreeNode[] {
+            treeNode13});
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -347,6 +347,7 @@
             this.ayudaToolStripButton});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
+            this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip.Size = new System.Drawing.Size(800, 25);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip1";
@@ -537,12 +538,12 @@
             this.instrumentsTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.instrumentsTreeView.Location = new System.Drawing.Point(3, 3);
             this.instrumentsTreeView.Name = "instrumentsTreeView";
-            treeNode9.Name = "Nodo1";
-            treeNode9.Text = "voice_keysplit_all voicegroup002";
-            treeNode10.Name = "Nodo0";
-            treeNode10.Text = "000 - Acoustic Grand";
+            treeNode13.Name = "Nodo1";
+            treeNode13.Text = "voice_keysplit_all voicegroup002";
+            treeNode14.Name = "Nodo0";
+            treeNode14.Text = "000 - Acoustic Grand";
             this.instrumentsTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode10});
+            treeNode14});
             this.instrumentsTreeView.Size = new System.Drawing.Size(220, 341);
             this.instrumentsTreeView.TabIndex = 3;
             // 

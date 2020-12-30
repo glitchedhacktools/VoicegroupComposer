@@ -199,6 +199,7 @@ namespace VoicegroupComposer
         {
             string folderDir = null;
             string currentDir = null;
+            folderBrowserDialog.SelectedPath = Properties.Settings.Default.ConfigLastDirectory;
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 folderDir = @folderBrowserDialog.SelectedPath;
@@ -209,6 +210,8 @@ namespace VoicegroupComposer
                     GlobalFilesPaths.Add(currentDir);
                     GlobalProjectPath = folderDir;
                 }
+                Properties.Settings.Default.ConfigLastDirectory = folderDir;
+                Properties.Settings.Default.Save();
                 return 0;
             }
             return 2;
