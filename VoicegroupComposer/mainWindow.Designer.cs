@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainWindow));
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("voice_keysplit_all voicegroup002");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("000 - Acoustic Grand", new System.Windows.Forms.TreeNode[] {
-            treeNode13});
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,27 +69,31 @@
             this.copiarToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.pegarToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.voicegroupFilesComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.ayudaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.voicegroupFilesComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.songFilesComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.instrumentsInVG = new System.Windows.Forms.ListBox();
             this.codeInVG = new System.Windows.Forms.ListBox();
-            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.instrumentsTreeView = new System.Windows.Forms.TreeView();
             this.songsTreeView = new System.Windows.Forms.TreeView();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.instrumentsTreeView = new System.Windows.Forms.TreeView();
+            this.instrumentsComboBox = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonRemove = new System.Windows.Forms.Button();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -343,8 +344,9 @@
             this.copiarToolStripButton,
             this.pegarToolStripButton,
             this.toolStripSeparator8,
+            this.ayudaToolStripButton,
             this.voicegroupFilesComboBox,
-            this.ayudaToolStripButton});
+            this.songFilesComboBox});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -425,17 +427,6 @@
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
             // 
-            // voicegroupFilesComboBox
-            // 
-            this.voicegroupFilesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.voicegroupFilesComboBox.DropDownWidth = 240;
-            this.voicegroupFilesComboBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.voicegroupFilesComboBox.MaxDropDownItems = 10;
-            this.voicegroupFilesComboBox.Name = "voicegroupFilesComboBox";
-            this.voicegroupFilesComboBox.Size = new System.Drawing.Size(248, 25);
-            this.voicegroupFilesComboBox.Sorted = true;
-            this.voicegroupFilesComboBox.SelectedIndexChanged += new System.EventHandler(this.ActionOpenVoicegroupFileOnChange);
-            // 
             // ayudaToolStripButton
             // 
             this.ayudaToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -445,6 +436,26 @@
             this.ayudaToolStripButton.Name = "ayudaToolStripButton";
             this.ayudaToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.ayudaToolStripButton.Text = "Ay&uda";
+            // 
+            // voicegroupFilesComboBox
+            // 
+            this.voicegroupFilesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.voicegroupFilesComboBox.DropDownWidth = 240;
+            this.voicegroupFilesComboBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.voicegroupFilesComboBox.IntegralHeight = false;
+            this.voicegroupFilesComboBox.Name = "voicegroupFilesComboBox";
+            this.voicegroupFilesComboBox.Size = new System.Drawing.Size(248, 25);
+            this.voicegroupFilesComboBox.Sorted = true;
+            this.voicegroupFilesComboBox.SelectedIndexChanged += new System.EventHandler(this.ActionOpenVoicegroupFileOnChange);
+            // 
+            // songFilesComboBox
+            // 
+            this.songFilesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.songFilesComboBox.DropDownWidth = 200;
+            this.songFilesComboBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.songFilesComboBox.Name = "songFilesComboBox";
+            this.songFilesComboBox.Size = new System.Drawing.Size(200, 25);
+            this.songFilesComboBox.SelectedIndexChanged += new System.EventHandler(this.ActionChangeSongFilesComboBoxIndex);
             // 
             // statusStrip
             // 
@@ -457,7 +468,7 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 240F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 380F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 240F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -479,7 +490,7 @@
             this.instrumentsInVG.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.instrumentsInVG.FormattingEnabled = true;
             this.instrumentsInVG.ItemHeight = 15;
-            this.instrumentsInVG.Location = new System.Drawing.Point(329, 3);
+            this.instrumentsInVG.Location = new System.Drawing.Point(469, 3);
             this.instrumentsInVG.Name = "instrumentsInVG";
             this.instrumentsInVG.Size = new System.Drawing.Size(234, 373);
             this.instrumentsInVG.TabIndex = 0;
@@ -490,37 +501,22 @@
             this.codeInVG.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.codeInVG.FormattingEnabled = true;
             this.codeInVG.ItemHeight = 15;
-            this.codeInVG.Location = new System.Drawing.Point(569, 3);
+            this.codeInVG.Location = new System.Drawing.Point(709, 3);
             this.codeInVG.Name = "codeInVG";
-            this.codeInVG.Size = new System.Drawing.Size(228, 373);
+            this.codeInVG.Size = new System.Drawing.Size(88, 373);
             this.codeInVG.TabIndex = 1;
-            // 
-            // folderBrowserDialog
-            // 
-            this.folderBrowserDialog.ShowNewFolderButton = false;
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(234, 373);
+            this.tabControl1.Size = new System.Drawing.Size(374, 373);
             this.tabControl1.TabIndex = 2;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.ActionEnableDisableButtons);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.instrumentsTreeView);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(226, 347);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Instruments";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
@@ -533,20 +529,6 @@
             this.tabPage2.Text = "Voicegroups";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // instrumentsTreeView
-            // 
-            this.instrumentsTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.instrumentsTreeView.Location = new System.Drawing.Point(3, 3);
-            this.instrumentsTreeView.Name = "instrumentsTreeView";
-            treeNode13.Name = "Nodo1";
-            treeNode13.Text = "voice_keysplit_all voicegroup002";
-            treeNode14.Name = "Nodo0";
-            treeNode14.Text = "000 - Acoustic Grand";
-            this.instrumentsTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode14});
-            this.instrumentsTreeView.Size = new System.Drawing.Size(220, 341);
-            this.instrumentsTreeView.TabIndex = 3;
-            // 
             // songsTreeView
             // 
             this.songsTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -556,6 +538,180 @@
             this.songsTreeView.TabIndex = 0;
             this.songsTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.ActionChangeVoicegroupComboBoxIndex);
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.tableLayoutPanel3);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(366, 347);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Instruments";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.instrumentsTreeView, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.instrumentsComboBox, 0, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(360, 341);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // instrumentsTreeView
+            // 
+            this.instrumentsTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.instrumentsTreeView.Location = new System.Drawing.Point(3, 30);
+            this.instrumentsTreeView.Name = "instrumentsTreeView";
+            this.instrumentsTreeView.Size = new System.Drawing.Size(354, 308);
+            this.instrumentsTreeView.TabIndex = 4;
+            // 
+            // instrumentsComboBox
+            // 
+            this.instrumentsComboBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.instrumentsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.instrumentsComboBox.FormattingEnabled = true;
+            this.instrumentsComboBox.Items.AddRange(new object[] {
+            "000 - Acoustic Grand Piano",
+            "001 - Bright Acoustic Piano",
+            "002 - Electric Grand Piano",
+            "003 - Honky-tonk Piano",
+            "004 - Electric Piano 1",
+            "005 - Electric Piano 2",
+            "006 - Harpsichord",
+            "007 - Clavi",
+            "008 - Celesta",
+            "009 - Glockenspiel",
+            "010 - Music Box",
+            "011 - Vibraphone",
+            "012 - Marimba",
+            "013 - Xylophone",
+            "014 - Tubular Bells",
+            "015 - Dulcimer",
+            "016 - Drawbar Organ",
+            "017 - Percussive Organ",
+            "018 - Rock Organ",
+            "019 - Church Organ",
+            "020 - Reed Organ",
+            "021 - Accordion",
+            "022 - Harmonica",
+            "023 - Tango Accordion",
+            "024 - Acoustic Guitar (nylon)",
+            "025 - Acoustic Guitar (steel)",
+            "026 - Electric Guitar (jazz)",
+            "027 - Electric Guitar (clean)",
+            "028 - Electric Guitar (muted)",
+            "029 - Overdriven Guitar",
+            "030 - Distortion Guitar",
+            "031 - Guitar Harmonics",
+            "032 - Acoustic Bass",
+            "033 - Electric Bass (finger)",
+            "034 - Electric Bass (pick)",
+            "035 - Fretless Bass",
+            "036 - Slap Bass 1",
+            "037 - Slap Bass 2",
+            "038 - Synth Bass 1",
+            "039 - Synth Bass 2",
+            "040 - Violin",
+            "041 - Viola",
+            "042 - Cello",
+            "043 - Contrabass",
+            "044 - Tremolo Strings",
+            "045 - Pizzicato Strings",
+            "046 - Orchestral Harp",
+            "047 - Timpani",
+            "048 - String Ensemble 1",
+            "049 - String Ensemble 2",
+            "050 - Synth Strings 1",
+            "051 - Synth Strings 2",
+            "052 - Choir Aahs",
+            "053 - Voice Oohs",
+            "054 - Synth Voice",
+            "055 - Orchestra Hit",
+            "056 - Trumpet",
+            "057 - Trombone",
+            "058 - Tuba",
+            "059 - Muted Trumpet",
+            "060 - French Horn",
+            "061 - Brass Section",
+            "062 - Synth Brass 1",
+            "063 - Synth Brass 2",
+            "064 - Soprano Sax",
+            "065 - Alto Sax",
+            "066 - Tenor Sax",
+            "067 - Baritone Sax",
+            "068 - Oboe",
+            "069 - English Horn",
+            "070 - Bassoon",
+            "071 - Clarinet",
+            "072 - Piccolo",
+            "073 - Flute",
+            "074 - Recorder",
+            "075 - Pan Flute",
+            "076 - Blown bottle",
+            "077 - Shakuhachi",
+            "078 - Whistle",
+            "079 - Ocarina",
+            "080 - Lead 1 (square)",
+            "081 - Lead 2 (sawtooth)",
+            "082 - Lead 3 (calliope)",
+            "083 - Lead 4 (chiff)",
+            "084 - Lead 5 (charang)",
+            "085 - Lead 6 (voice)",
+            "086 - Lead 7 (fifths)",
+            "087 - Lead 8 (bass + lead)",
+            "088 - Pad 1 (new age)",
+            "089 - Pad 2 (warm)",
+            "090 - Pad 3 (polysynth)",
+            "091 - Pad 4 (choir)",
+            "092 - Pad 5 (bowed)",
+            "093 - Pad 6 (metallic)",
+            "094 - Pad 7 (halo)",
+            "095 - Pad 8 (sweep)",
+            "096 - FX 1 (rain)",
+            "097 - FX 2 (soundtrack)",
+            "098 - FX 3 (crystal)",
+            "099 - FX 4 (atmosphere)",
+            "100 - FX 5 (brightness)",
+            "101 - FX 6 (goblins)",
+            "102 - FX 7 (echoes)",
+            "103 - FX 8 (sci-fi)",
+            "104 - Sitar",
+            "105 - Banjo",
+            "106 - Shamisen",
+            "107 - Koto",
+            "108 - Kalimba",
+            "109 - Bag pipe",
+            "110 - Fiddle",
+            "111 - Shanai",
+            "112 - Tinkle Bell",
+            "113 - Agogô",
+            "114 - Steel Drums",
+            "115 - Woodblock",
+            "116 - Taiko Drum",
+            "117 - Melodic Tom",
+            "118 - Synth Drum",
+            "119 - Reverse Cymbal",
+            "120 - Guitar Fret Noise",
+            "121 - Breath Noise",
+            "122 - Seashore",
+            "123 - Bird Tweet",
+            "124 - Telephone Ring",
+            "125 - Helicopter",
+            "126 - Applause",
+            "127 - Gunshot"});
+            this.instrumentsComboBox.Location = new System.Drawing.Point(3, 3);
+            this.instrumentsComboBox.Name = "instrumentsComboBox";
+            this.instrumentsComboBox.Size = new System.Drawing.Size(354, 21);
+            this.instrumentsComboBox.TabIndex = 0;
+            this.instrumentsComboBox.SelectedIndexChanged += new System.EventHandler(this.ActionSelectInstrumentComboBox);
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
@@ -563,7 +719,7 @@
             this.tableLayoutPanel2.Controls.Add(this.buttonAdd, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.buttonRemove, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(243, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(383, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -593,6 +749,10 @@
             this.buttonRemove.Text = "<< Remove";
             this.buttonRemove.UseVisualStyleBackColor = true;
             // 
+            // folderBrowserDialog
+            // 
+            this.folderBrowserDialog.ShowNewFolderButton = false;
+            // 
             // mainWindow
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -610,8 +770,9 @@
             this.toolStrip.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -662,19 +823,22 @@
         private System.Windows.Forms.ToolStripButton ayudaToolStripButton;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripComboBox voicegroupFilesComboBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.ListBox instrumentsInVG;
         private System.Windows.Forms.ListBox codeInVG;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TreeView instrumentsTreeView;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TreeView songsTreeView;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonRemove;
+        private System.Windows.Forms.ToolStripComboBox songFilesComboBox;
+        private System.Windows.Forms.ToolStripComboBox voicegroupFilesComboBox;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TreeView instrumentsTreeView;
+        private System.Windows.Forms.ComboBox instrumentsComboBox;
     }
 }
 

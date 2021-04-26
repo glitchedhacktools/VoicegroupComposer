@@ -150,6 +150,8 @@ namespace VoicegroupComposer
             "127 - Gunshot"
         };
 
+        public List<InstrumentData> GlobalInstrumentData = new List<InstrumentData>();
+
         public List<string> GlobalFilesNeeded = new List<string>
         {
             @"/songs.mk",
@@ -158,6 +160,9 @@ namespace VoicegroupComposer
         };
 
         public List<string> GlobalFilesPaths = new List<string>();
+
+        public List<SongData> GlobalSongList = new List<SongData>();
+        public List<string> SongList = new List<string>();
 
         public string GlobalProjectPath = null;
 
@@ -192,7 +197,11 @@ namespace VoicegroupComposer
 
             GetVoicegroupList();
             OpenVoicegroupFile();
+            GetSongsList();
             GetVoicegroupSongs();
+            InitInstrumentData();
+            GetInstrumentData();
+            FillInstrumentTreeNode(0);
         }
 
         public int SetDirectory()
@@ -233,6 +242,119 @@ namespace VoicegroupComposer
             return true;
         }
 
+        public bool GetSongsList()
+        {
+            //short songId = -1;
+            songFilesComboBox.Items.Clear();
+            string[] songs = File.ReadAllLines(GlobalFilesPaths[2]);
+            foreach (string element in songs)
+            {
+                if (element.StartsWith("#define"))
+                {
+                    SongData song = new SongData();
+                    var info = element.Remove(0, 8).Split(' ');
+
+                    song.songName = info[0];
+                    bool isNumber = false;
+                    int i = 1;
+                    while (!isNumber && i < info.Length)
+                    {
+                        isNumber = short.TryParse(info[i], out short songId);
+                        if (isNumber)
+                        {
+                            song.id = short.Parse(info[i]);
+                        }
+                        i++;
+                    }
+                    if (isNumber)
+                    {
+                        GlobalSongList.Add(song);
+                        SongList.Add(song.songName);
+                    }
+                    songFilesComboBox.Items.Add(song.songName);
+                }
+            }
+            songFilesComboBox.Items.RemoveAt(0);
+            songFilesComboBox.SelectedIndex = 0;
+            return true;
+        }
+
+        public bool InitInstrumentData()
+        {
+            instrumentsComboBox.SelectedIndex = 0;
+            foreach (string instrument in GlobalInstrumentsList)
+            {
+                InstrumentData instrumentData = new InstrumentData();
+                instrumentData.id = GlobalInstrumentsList.IndexOf(instrument);
+                List<InstrumentLine> lines = new List<InstrumentLine>();
+                foreach (InstrumentLine line in lines)
+                {
+                    List<int> vgs = new List<int>();
+                    line.vg = vgs;
+                }
+                instrumentData.lines = lines;
+                GlobalInstrumentData.Add(instrumentData);
+            }
+            return true;
+        }
+
+        public bool GetInstrumentData()
+        {
+            int i;
+            foreach (object vgFile in voicegroupFilesComboBox.Items)
+            {
+                string[] file = File.ReadAllLines(Path.Combine(GlobalProjectPath + vgFile.ToString()));
+                for (i = 2; i < file.Length - 1; i++)
+                {
+                    if (!file[i].Contains(GlobalDefaultInstrument))
+                    {
+                        string lineToAdd = file[i].Remove(0, 1).Remove(file[i].Length - 11, 10);
+                        try
+                        {
+                            int lineIndex;
+                            
+                            lineIndex = GlobalInstrumentData[i - 2].lines.FindIndex(x => x.code == lineToAdd);
+                            if (lineIndex >= 0)
+                            {
+                                GlobalInstrumentData[i - 2].lines[lineIndex].vg.Add(voicegroupFilesComboBox.Items.IndexOf(vgFile));
+                            }
+                            else
+                            {
+                                InstrumentLine info = new InstrumentLine();
+                                info.vg = new List<int>();
+                                info.vg.Add(voicegroupFilesComboBox.Items.IndexOf(vgFile));
+                                info.code = lineToAdd;
+                                GlobalInstrumentData[i - 2].lines.Add(info);
+                            }
+                            
+                        }
+                        catch
+                        {
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        public bool FillInstrumentTreeNode(int instrument)
+        {
+            InstrumentData instrumentData = GlobalInstrumentData[instrument];
+
+            foreach (InstrumentLine line in instrumentData.lines)
+            {
+                TreeNode currentInstrument = new TreeNode(line.code);
+                foreach (int vg in line.vg)
+                {
+                    TreeNode currentVg = new TreeNode(voicegroupFilesComboBox.Items[vg].ToString().Remove(0, 19).Remove(13));
+                    currentInstrument.Nodes.Add(currentVg);
+                }
+                instrumentsTreeView.Nodes.Add(currentInstrument);
+            }
+
+            return true;
+        }
+
         public int GetVoicegroupSongs()
         {
             int i;
@@ -266,6 +388,7 @@ namespace VoicegroupComposer
                     {
                         vg = short.Parse(songs[i + 1].Remove(38).Remove(0, 35));
                         songsTreeView.Nodes[vg].Nodes.Add(song);
+                        GlobalSongList[SongList.IndexOf(song)].voicegroup = (short)vg;
                     }
                     catch
                     {
@@ -286,7 +409,8 @@ namespace VoicegroupComposer
             {
                 if (!code[i].Contains(GlobalDefaultInstrument))
                 {
-                    codeInVG.Items.Add(code[i].Remove(0,1).Remove(code[i].Length - 11, 10));
+                    string lineToAdd = code[i].Remove(0, 1).Remove(code[i].Length - 11, 10);
+                    codeInVG.Items.Add(lineToAdd);
                     try
                     {
                         instrumentsInVG.Items.Add(GlobalInstrumentsList[i - 2]);
@@ -312,7 +436,7 @@ namespace VoicegroupComposer
                     buttonAdd.Enabled = true;
                     buttonRemove.Enabled = true;
                     break;
-                case 1:
+                case 0:
                     buttonAdd.Enabled = false;
                     buttonRemove.Enabled = false;
                     break;
@@ -333,12 +457,40 @@ namespace VoicegroupComposer
             }
             if (index != -1) voicegroupFilesComboBox.SelectedIndex = index;
         }
+
+        private void ActionChangeSongFilesComboBoxIndex(object sender, EventArgs e)
+        {
+            ToolStripComboBox combo = ((ToolStripComboBox)sender);
+
+            voicegroupFilesComboBox.SelectedIndex = GlobalSongList[SongList.IndexOf(combo.SelectedItem.ToString())].voicegroup;
+        }
+
+        private void ActionSelectInstrumentComboBox(object sender, EventArgs e)
+        {
+            if (GlobalInstrumentData.Count > 0)
+            {
+                instrumentsTreeView.Nodes.Clear();
+                FillInstrumentTreeNode(instrumentsComboBox.SelectedIndex);
+            }
+        }
     }
 
     public class InstrumentData
     {
-        public static int id { get; set; }
-        public static string instrument { get; set; }
-        public static string[] lines { get; set; }
+        public int id { get; set; }
+        public List<InstrumentLine> lines { get; set; }
+    }
+
+    public class InstrumentLine
+    {
+        public List<int> vg { get; set; }
+        public string code { get; set; }
+    }
+
+    public class SongData
+    {
+        public short id { get; set; }
+        public string songName { get; set; }
+        public short voicegroup { get; set; }
     }
 }
